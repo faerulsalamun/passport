@@ -69,7 +69,7 @@ class AuthorizationController
                 $client = $clients->find($authRequest->getClient()->getIdentifier())
             );
 
-            if ($token && $token->scopes === collect($scopes)->pluck('id')->all()) {
+            if ($token && $token->SCOPES === collect($scopes)->pluck('ID')->all()) {
                 return $this->approveRequest($authRequest, $user);
             }
 
@@ -78,14 +78,14 @@ class AuthorizationController
             return $this->response->view('passport::authorize', [
                 'client' => $client,
                 'user' => $user,
-                'scopes' => $scopes,
+                'SCOPES' => $scopes,
                 'request' => $request,
             ]);
         });
     }
 
     /**
-     * Transform the authorization requests's scopes into Scope instances.
+     * Transform the authorization requests's SCOPES into Scope instances.
      *
      * @param  \League\OAuth2\Server\RequestTypes\AuthorizationRequest  $authRequest
      * @return array

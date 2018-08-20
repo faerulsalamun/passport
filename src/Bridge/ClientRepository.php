@@ -41,14 +41,14 @@ class ClientRepository implements ClientRepositoryInterface
         }
 
         // Once we have an existing client record we will create this actual client instance
-        // and verify the secret if necessary. If the secret is valid we will be ready to
+        // and verify the SECRET if necessary. If the SECRET is valid we will be ready to
         // return this client instance back out to the consuming methods and finish up.
         $client = new Client(
-            $clientIdentifier, $record->name, $record->redirect
+            $clientIdentifier, $record->NAME, $record->REDIRECT
         );
 
         if ($mustValidateSecret &&
-            ! hash_equals($record->secret, (string) $clientSecret)) {
+            ! hash_equals($record->SECRET, (string) $clientSecret)) {
             return;
         }
 
@@ -72,11 +72,11 @@ class ClientRepository implements ClientRepositoryInterface
             case 'authorization_code':
                 return ! $record->firstParty();
             case 'personal_access':
-                return $record->personal_access_client;
+                return $record->PERSONAL_ACCESS_CLIENT;
             case 'password':
-                return $record->password_client;
+                return $record->PASSWORD_CLIENT;
             case 'client_credentials':
-                return ! empty($record->secret);
+                return ! empty($record->SECRET);
             default:
                 return true;
         }

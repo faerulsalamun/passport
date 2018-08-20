@@ -21,72 +21,72 @@ class BridgeClientRepositoryTest extends TestCase
 
     public function test_can_get_client_for_auth_code_grant()
     {
-        $client = $this->repository->getClientEntity(1, 'authorization_code', 'secret', true);
+        $client = $this->repository->getClientEntity(1, 'authorization_code', 'SECRET', true);
 
         $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $client);
-        $this->assertNull($this->repository->getClientEntity(1, 'authorization_code', 'wrong-secret', true));
-        $this->assertNull($this->repository->getClientEntity(1, 'client_credentials', 'wrong-secret', true));
+        $this->assertNull($this->repository->getClientEntity(1, 'authorization_code', 'wrong-SECRET', true));
+        $this->assertNull($this->repository->getClientEntity(1, 'client_credentials', 'wrong-SECRET', true));
     }
 
     public function test_can_get_client_for_client_credentials_grant()
     {
         $client = $this->clientModelRepository->findActive(1);
-        $client->personal_access_client = true;
+        $client->PERSONAL_ACCESS_CLIENT = true;
 
-        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'client_credentials', 'secret', true));
-        $this->assertNull($this->repository->getClientEntity(1, 'authorization_code', 'secret', true));
+        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'client_credentials', 'SECRET', true));
+        $this->assertNull($this->repository->getClientEntity(1, 'authorization_code', 'SECRET', true));
     }
 
     public function test_password_grant_is_permitted()
     {
         $client = $this->clientModelRepository->findActive(1);
-        $client->password_client = true;
+        $client->PASSWORD_CLIENT = true;
 
-        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'password', 'secret'));
+        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'password', 'SECRET'));
     }
 
     public function test_password_grant_is_prevented()
     {
-        $this->assertNull($this->repository->getClientEntity(1, 'password', 'secret'));
+        $this->assertNull($this->repository->getClientEntity(1, 'password', 'SECRET'));
     }
 
     public function test_authorization_code_grant_is_permitted()
     {
-        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'authorization_code', 'secret'));
+        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'authorization_code', 'SECRET'));
     }
 
     public function test_authorization_code_grant_is_prevented()
     {
         $client = $this->clientModelRepository->findActive(1);
-        $client->password_client = true;
+        $client->PASSWORD_CLIENT = true;
 
-        $this->assertNull($this->repository->getClientEntity(1, 'authorization_code', 'secret'));
+        $this->assertNull($this->repository->getClientEntity(1, 'authorization_code', 'SECRET'));
     }
 
     public function test_personal_access_grant_is_permitted()
     {
         $client = $this->clientModelRepository->findActive(1);
-        $client->personal_access_client = true;
+        $client->PERSONAL_ACCESS_CLIENT = true;
 
-        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'personal_access', 'secret'));
+        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'personal_access', 'SECRET'));
     }
 
     public function test_personal_access_grant_is_prevented()
     {
-        $this->assertNull($this->repository->getClientEntity(1, 'personal_access', 'secret'));
+        $this->assertNull($this->repository->getClientEntity(1, 'personal_access', 'SECRET'));
     }
 
     public function test_client_credentials_grant_is_permitted()
     {
-        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'client_credentials', 'secret'));
+        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'client_credentials', 'SECRET'));
     }
 
     public function test_client_credentials_grant_is_prevented()
     {
         $client = $this->clientModelRepository->findActive(1);
-        $client->secret = null;
+        $client->SECRET = null;
 
-        $this->assertNull($this->repository->getClientEntity(1, 'client_credentials', 'secret'));
+        $this->assertNull($this->repository->getClientEntity(1, 'client_credentials', 'SECRET'));
     }
 
     public function test_grant_types_allows_request()
@@ -94,7 +94,7 @@ class BridgeClientRepositoryTest extends TestCase
         $client = $this->clientModelRepository->findActive(1);
         $client->grant_types = ['client_credentials'];
 
-        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'client_credentials', 'secret'));
+        $this->assertInstanceOf('Laravel\Passport\Bridge\Client', $this->repository->getClientEntity(1, 'client_credentials', 'SECRET'));
     }
 
     public function test_grant_types_disallows_request()
@@ -102,7 +102,7 @@ class BridgeClientRepositoryTest extends TestCase
         $client = $this->clientModelRepository->findActive(1);
         $client->grant_types = ['client_credentials'];
 
-        $this->assertNull($this->repository->getClientEntity(1, 'authorization_code', 'secret'));
+        $this->assertNull($this->repository->getClientEntity(1, 'authorization_code', 'SECRET'));
     }
 }
 
@@ -110,13 +110,13 @@ class BridgeClientRepositoryTestClientStub
 {
     public $name = 'Client';
     public $redirect = 'http://localhost';
-    public $secret = 'secret';
+    public $secret = 'SECRET';
     public $personal_access_client = false;
     public $password_client = false;
     public $grant_types;
 
     public function firstParty()
     {
-        return $this->personal_access_client || $this->password_client;
+        return $this->PERSONAL_ACCESS_CLIENT || $this->PASSWORD_CLIENT;
     }
 }

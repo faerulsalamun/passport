@@ -49,7 +49,7 @@ class PersonalAccessTokenController
         $tokens = $this->tokenRepository->forUser($request->user()->getKey());
 
         return $tokens->load('client')->filter(function ($token) {
-            return $token->client->personal_access_client && ! $token->revoked;
+            return $token->client->PERSONAL_ACCESS_CLIENT && ! $token->REVOKED;
         })->values();
     }
 
@@ -62,12 +62,12 @@ class PersonalAccessTokenController
     public function store(Request $request)
     {
         $this->validation->make($request->all(), [
-            'name' => 'required|max:255',
-            'scopes' => 'array|in:'.implode(',', Passport::scopeIds()),
+            'NAME' => 'required|max:255',
+            'SCOPES' => 'array|in:'.implode(',', Passport::scopeIds()),
         ])->validate();
 
         return $request->user()->createToken(
-            $request->name, $request->scopes ?: []
+            $request->NAME, $request->SCOPES ?: []
         );
     }
 

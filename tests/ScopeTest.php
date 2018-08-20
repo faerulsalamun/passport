@@ -8,7 +8,7 @@ class ScopeTest extends TestCase
     {
         $scope = new Laravel\Passport\Scope('user', 'get user information');
         $this->assertEquals([
-            'id' => 'user',
+            'ID' => 'user',
             'description' => 'get user information',
         ], $scope->toArray());
     }
@@ -17,7 +17,7 @@ class ScopeTest extends TestCase
     {
         $scope = new Laravel\Passport\Scope('user', 'get user information');
         $this->assertEquals(json_encode([
-            'id' => 'user',
+            'ID' => 'user',
             'description' => 'get user information',
         ]), $scope->toJson());
     }

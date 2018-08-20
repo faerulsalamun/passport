@@ -17,7 +17,7 @@ class BridgeScopeRepositoryTest extends TestCase
         $repository = new ScopeRepository;
 
         $scopes = $repository->finalizeScopes(
-            [$scope1 = new Scope('scope-1'), new Scope('scope-2')], 'client_credentials', new Client('id', 'name', 'http://localhost'), 1
+            [$scope1 = new Scope('scope-1'), new Scope('scope-2')], 'client_credentials', new Client('ID', 'NAME', 'http://localhost'), 1
         );
 
         $this->assertEquals([$scope1], $scopes);
@@ -32,7 +32,7 @@ class BridgeScopeRepositoryTest extends TestCase
         $repository = new ScopeRepository;
 
         $scopes = $repository->finalizeScopes(
-            [$scope1 = new Scope('*')], 'client_credentials', new Client('id', 'name', 'http://localhost'), 1
+            [$scope1 = new Scope('*')], 'client_credentials', new Client('ID', 'NAME', 'http://localhost'), 1
         );
 
         $this->assertEquals([], $scopes);

@@ -41,13 +41,13 @@ class AuthCodeRepository implements AuthCodeRepositoryInterface
      */
     public function persistNewAuthCode(AuthCodeEntityInterface $authCodeEntity)
     {
-        $this->database->table('oauth_auth_codes')->insert([
-            'id' => $authCodeEntity->getIdentifier(),
-            'user_id' => $authCodeEntity->getUserIdentifier(),
-            'client_id' => $authCodeEntity->getClient()->getIdentifier(),
-            'scopes' => $this->formatScopesForStorage($authCodeEntity->getScopes()),
-            'revoked' => false,
-            'expires_at' => $authCodeEntity->getExpiryDateTime(),
+        $this->database->table('OAUTH_AUTH_CODES')->insert([
+            'ID' => $authCodeEntity->getIdentifier(),
+            'USER_ID' => $authCodeEntity->getUserIdentifier(),
+            'CLIENT_ID' => $authCodeEntity->getClient()->getIdentifier(),
+            'SCOPES' => $this->formatScopesForStorage($authCodeEntity->getScopes()),
+            'REVOKED' => false,
+            'EXPIRES_AT' => $authCodeEntity->getExpiryDateTime(),
         ]);
     }
 
@@ -56,8 +56,8 @@ class AuthCodeRepository implements AuthCodeRepositoryInterface
      */
     public function revokeAuthCode($codeId)
     {
-        $this->database->table('oauth_auth_codes')
-                    ->where('id', $codeId)->update(['revoked' => true]);
+        $this->database->table('OAUTH_AUTH_CODES')
+                    ->where('ID', $codeId)->update(['REVOKED' => true]);
     }
 
     /**
@@ -65,7 +65,7 @@ class AuthCodeRepository implements AuthCodeRepositoryInterface
      */
     public function isAuthCodeRevoked($codeId)
     {
-        return $this->database->table('oauth_auth_codes')
-                    ->where('id', $codeId)->where('revoked', 1)->exists();
+        return $this->database->table('OAUTH_AUTH_CODES')
+                    ->where('ID', $codeId)->where('REVOKED', 1)->exists();
     }
 }

@@ -39,6 +39,6 @@ class ApproveAuthorizationControllerFakeUser
     public $id = 1;
     public function getKey()
     {
-        return $this->id;
+        return $this->ID;
     }
 }

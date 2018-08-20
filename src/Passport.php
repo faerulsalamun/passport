@@ -25,7 +25,7 @@ class Passport
     public static $revokeOtherTokens = false;
 
     /**
-     * Indicates if Passport should prune revoked tokens.
+     * Indicates if Passport should prune REVOKED tokens.
      *
      * @var bool
      */
@@ -39,7 +39,7 @@ class Passport
     public static $personalAccessClientId;
 
     /**
-     * All of the scopes defined for the application.
+     * All of the SCOPES defined for the application.
      *
      * @var array
      */
@@ -62,7 +62,7 @@ class Passport
     public static $refreshTokensExpireAt;
 
     /**
-     * The name for API token cookies.
+     * The NAME for API token cookies.
      *
      * @var string
      */
@@ -83,28 +83,28 @@ class Passport
     public static $keyPath;
 
     /**
-     * The auth code model class name.
+     * The auth code model class NAME.
      *
      * @var string
      */
     public static $authCodeModel = 'Laravel\Passport\AuthCode';
 
     /**
-     * The client model class name.
+     * The client model class NAME.
      *
      * @var string
      */
     public static $clientModel = 'Laravel\Passport\Client';
 
     /**
-     * The personal access client model class name.
+     * The personal access client model class NAME.
      *
      * @var string
      */
     public static $personalAccessClientModel = 'Laravel\Passport\PersonalAccessClient';
 
     /**
-     * The token model class name.
+     * The token model class NAME.
      *
      * @var string
      */
@@ -174,7 +174,7 @@ class Passport
     }
 
     /**
-     * Instruct Passport to keep revoked tokens pruned.
+     * Instruct Passport to keep REVOKED tokens pruned.
      *
      * @deprecated since 1.0. Listen to Passport events on token creation instead.
      *
@@ -205,7 +205,7 @@ class Passport
      */
     public static function scopeIds()
     {
-        return static::scopes()->pluck('id')->values()->all();
+        return static::SCOPES()->pluck('ID')->values()->all();
     }
 
     /**
@@ -220,11 +220,11 @@ class Passport
     }
 
     /**
-     * Get all of the scopes defined for the application.
+     * Get all of the SCOPES defined for the application.
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function scopes()
+    public static function SCOPES()
     {
         return collect(static::$scopes)->map(function ($description, $id) {
             return new Scope($id, $description);
@@ -232,7 +232,7 @@ class Passport
     }
 
     /**
-     * Get all of the scopes matching the given IDs.
+     * Get all of the SCOPES matching the given IDs.
      *
      * @param  array  $ids
      * @return array
@@ -249,7 +249,7 @@ class Passport
     }
 
     /**
-     * Define the scopes for the application.
+     * Define the SCOPES for the application.
      *
      * @param  array  $scopes
      * @return void
@@ -298,7 +298,7 @@ class Passport
     }
 
     /**
-     * Get or set the name for API token cookies.
+     * Get or set the NAME for API token cookies.
      *
      * @param  string|null  $cookie
      * @return string|static
@@ -328,7 +328,7 @@ class Passport
     }
 
     /**
-     * Set the current user for the application with the given scopes.
+     * Set the current user for the application with the given SCOPES.
      *
      * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
      * @param  array  $scopes
@@ -379,7 +379,7 @@ class Passport
     }
 
     /**
-     * Set the auth code model class name.
+     * Set the auth code model class NAME.
      *
      * @param  string  $authCodeModel
      * @return void
@@ -390,7 +390,7 @@ class Passport
     }
 
     /**
-     * Get the auth code model class name.
+     * Get the auth code model class NAME.
      *
      * @return string
      */
@@ -410,7 +410,7 @@ class Passport
     }
 
     /**
-     * Set the client model class name.
+     * Set the client model class NAME.
      *
      * @param  string  $clientModel
      * @return void
@@ -421,7 +421,7 @@ class Passport
     }
 
     /**
-     * Get the client model class name.
+     * Get the client model class NAME.
      *
      * @return string
      */
@@ -441,7 +441,7 @@ class Passport
     }
 
     /**
-     * Set the personal access client model class name.
+     * Set the personal access client model class NAME.
      *
      * @param  string  $clientModel
      * @return void
@@ -452,7 +452,7 @@ class Passport
     }
 
     /**
-     * Get the personal access client model class name.
+     * Get the personal access client model class NAME.
      *
      * @return string
      */
@@ -472,7 +472,7 @@ class Passport
     }
 
     /**
-     * Set the token model class name.
+     * Set the token model class NAME.
      *
      * @param  string  $tokenModel
      * @return void
@@ -483,7 +483,7 @@ class Passport
     }
 
     /**
-     * Get the token model class name.
+     * Get the token model class NAME.
      *
      * @return string
      */

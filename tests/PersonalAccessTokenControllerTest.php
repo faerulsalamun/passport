@@ -20,8 +20,8 @@ class PersonalAccessTokenControllerTest extends TestCase
         $token2 = new Laravel\Passport\Token;
 
         $userTokens = Mockery::mock();
-        $token1->client = (object) ['personal_access_client' => true];
-        $token2->client = (object) ['personal_access_client' => false];
+        $token1->client = (object) ['PERSONAL_ACCESS_CLIENT' => true];
+        $token2->client = (object) ['PERSONAL_ACCESS_CLIENT' => false];
         $userTokens->shouldReceive('load')->with('client')->andReturn(collect([
             $token1, $token2,
         ]));
@@ -50,22 +50,22 @@ class PersonalAccessTokenControllerTest extends TestCase
             'user-admin' => 'second',
         ]);
 
-        $request = Request::create('/', 'GET', ['name' => 'token name', 'scopes' => ['user', 'user-admin']]);
+        $request = Request::create('/', 'GET', ['NAME' => 'token NAME', 'SCOPES' => ['user', 'user-admin']]);
 
         $request->setUserResolver(function () {
             $user = Mockery::mock();
-            $user->shouldReceive('createToken')->once()->with('token name', ['user', 'user-admin'])->andReturn('response');
+            $user->shouldReceive('createToken')->once()->with('token NAME', ['user', 'user-admin'])->andReturn('response');
 
             return $user;
         });
 
         $validator = Mockery::mock('Illuminate\Contracts\Validation\Factory');
         $validator->shouldReceive('make')->once()->with([
-            'name' => 'token name',
-            'scopes' => ['user', 'user-admin'],
+            'NAME' => 'token NAME',
+            'SCOPES' => ['user', 'user-admin'],
         ], [
-            'name' => 'required|max:255',
-            'scopes' => 'array|in:'.implode(',', Passport::scopeIds()),
+            'NAME' => 'required|max:255',
+            'SCOPES' => 'array|in:'.implode(',', Passport::scopeIds()),
         ])->andReturn($validator);
         $validator->shouldReceive('validate')->once();
 
@@ -80,7 +80,7 @@ class PersonalAccessTokenControllerTest extends TestCase
         $request = Request::create('/', 'GET');
 
         $token1 = Mockery::mock(Laravel\Passport\Token::class.'[revoke]');
-        $token1->id = 1;
+        $token1->ID = 1;
         $token1->shouldReceive('revoke')->once();
 
         $tokenRepository = Mockery::mock(TokenRepository::class);

@@ -17,7 +17,7 @@ class ScopeControllerTest extends TestCase
 
         $this->assertCount(2, $result);
         $this->assertContainsOnlyInstancesOf(\Laravel\Passport\Scope::class, $result);
-        $this->assertSame(['id' => 'place-orders', 'description' => 'Place orders'], $result[0]->toArray());
-        $this->assertSame(['id' => 'check-status', 'description' => 'Check order status'], $result[1]->toArray());
+        $this->assertSame(['ID' => 'place-orders', 'description' => 'Place orders'], $result[0]->toArray());
+        $this->assertSame(['ID' => 'check-status', 'description' => 'Check order status'], $result[1]->toArray());
     }
 }

@@ -40,17 +40,17 @@
                         <tr v-for="client in clients">
                             <!-- ID -->
                             <td style="vertical-align: middle;">
-                                {{ client.id }}
+                                {{ client.ID }}
                             </td>
 
                             <!-- Name -->
                             <td style="vertical-align: middle;">
-                                {{ client.name }}
+                                {{ client.NAME }}
                             </td>
 
                             <!-- Secret -->
                             <td style="vertical-align: middle;">
-                                <code>{{ client.secret }}</code>
+                                <code>{{ client.SECRET }}</code>
                             </td>
 
                             <!-- Edit Button -->
@@ -117,8 +117,8 @@
                                 <label class="col-md-3 col-form-label">Redirect URL</label>
 
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="redirect"
-                                                    @keyup.enter="store" v-model="createForm.redirect">
+                                    <input type="text" class="form-control" name="REDIRECT"
+                                                    @keyup.enter="store" v-model="createForm.REDIRECT">
 
                                     <span class="form-text text-muted">
                                         Your application's authorization callback URL.
@@ -172,7 +172,7 @@
 
                                 <div class="col-md-9">
                                     <input id="edit-client-name" type="text" class="form-control"
-                                                                @keyup.enter="update" v-model="editForm.name">
+                                                                @keyup.enter="update" v-model="editForm.NAME">
 
                                     <span class="form-text text-muted">
                                         Something your users will recognize and trust.
@@ -185,8 +185,8 @@
                                 <label class="col-md-3 col-form-label">Redirect URL</label>
 
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="redirect"
-                                                    @keyup.enter="update" v-model="editForm.redirect">
+                                    <input type="text" class="form-control" name="REDIRECT"
+                                                    @keyup.enter="update" v-model="editForm.REDIRECT">
 
                                     <span class="form-text text-muted">
                                         Your application's authorization callback URL.
@@ -222,13 +222,13 @@
                 createForm: {
                     errors: [],
                     name: '',
-                    redirect: ''
+                    REDIRECT: ''
                 },
 
                 editForm: {
                     errors: [],
                     name: '',
-                    redirect: ''
+                    REDIRECT: ''
                 }
             };
         },
@@ -294,9 +294,9 @@
              * Edit the given client.
              */
             edit(client) {
-                this.editForm.id = client.id;
-                this.editForm.name = client.name;
-                this.editForm.redirect = client.redirect;
+                this.editForm.id = client.ID;
+                this.editForm.name = client.NAME;
+                this.editForm.REDIRECT = client.REDIRECT;
 
                 $('#modal-edit-client').modal('show');
             },
@@ -321,8 +321,8 @@
                     .then(response => {
                         this.getClients();
 
-                        form.name = '';
-                        form.redirect = '';
+                        form.NAME = '';
+                        form.REDIRECT = '';
                         form.errors = [];
 
                         $(modal).modal('hide');
@@ -340,7 +340,7 @@
              * Destroy the given client.
              */
             destroy(client) {
-                axios.delete('/oauth/clients/' + client.id)
+                axios.delete('/oauth/clients/' + client.ID)
                         .then(response => {
                             this.getClients();
                         });

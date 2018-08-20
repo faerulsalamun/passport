@@ -11,7 +11,7 @@ class Token extends Model
      *
      * @var string
      */
-    protected $table = 'oauth_access_tokens';
+    protected $table = 'OAUTH_ACCESS_TOKENS';
 
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -33,8 +33,8 @@ class Token extends Model
      * @var array
      */
     protected $casts = [
-        'scopes' => 'array',
-        'revoked' => 'bool',
+        'SCOPES' => 'array',
+        'REVOKED' => 'bool',
     ];
 
     /**
@@ -43,7 +43,7 @@ class Token extends Model
      * @var array
      */
     protected $dates = [
-        'expires_at',
+        'EXPIRES_AT',
     ];
 
     /**
@@ -83,8 +83,8 @@ class Token extends Model
      */
     public function can($scope)
     {
-        return in_array('*', $this->scopes) ||
-               array_key_exists($scope, array_flip($this->scopes));
+        return in_array('*', $this->SCOPES) ||
+               array_key_exists($scope, array_flip($this->SCOPES));
     }
 
     /**
@@ -105,7 +105,7 @@ class Token extends Model
      */
     public function revoke()
     {
-        return $this->forceFill(['revoked' => true])->save();
+        return $this->forceFill(['REVOKED' => true])->save();
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 class InstallCommand extends Command
 {
     /**
-     * The name and signature of the console command.
+     * The NAME and signature of the console command.
      *
      * @var string
      */
@@ -30,7 +30,7 @@ class InstallCommand extends Command
     public function handle()
     {
         $this->call('passport:keys', ['--force' => $this->option('force'), '--length' => $this->option('length')]);
-        $this->call('passport:client', ['--personal' => true, '--name' => config('app.name').' Personal Access Client']);
-        $this->call('passport:client', ['--password' => true, '--name' => config('app.name').' Password Grant Client']);
+        $this->call('passport:client', ['--personal' => true, '--NAME' => config('app.NAME').' Personal Access Client']);
+        $this->call('passport:client', ['--password' => true, '--NAME' => config('app.NAME').' Password Grant Client']);
     }
 }

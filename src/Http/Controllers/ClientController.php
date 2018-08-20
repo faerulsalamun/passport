@@ -47,7 +47,7 @@ class ClientController
     {
         $userId = $request->user()->getKey();
 
-        return $this->clients->activeForUser($userId)->makeVisible('secret');
+        return $this->clients->activeForUser($userId)->makeVisible('SECRET');
     }
 
     /**
@@ -59,13 +59,13 @@ class ClientController
     public function store(Request $request)
     {
         $this->validation->make($request->all(), [
-            'name' => 'required|max:255',
-            'redirect' => 'required|url',
+            'NAME' => 'required|max:255',
+            'REDIRECT' => 'required|url',
         ])->validate();
 
         return $this->clients->create(
-            $request->user()->getKey(), $request->name, $request->redirect
-        )->makeVisible('secret');
+            $request->user()->getKey(), $request->NAME, $request->REDIRECT
+        )->makeVisible('SECRET');
     }
 
     /**
@@ -84,12 +84,12 @@ class ClientController
         }
 
         $this->validation->make($request->all(), [
-            'name' => 'required|max:255',
-            'redirect' => 'required|url',
+            'NAME' => 'required|max:255',
+            'REDIRECT' => 'required|url',
         ])->validate();
 
         return $this->clients->update(
-            $client, $request->name, $request->redirect
+            $client, $request->NAME, $request->REDIRECT
         );
     }
 

@@ -11,7 +11,7 @@ class AuthCode extends Model
      *
      * @var string
      */
-    protected $table = 'oauth_auth_codes';
+    protected $table = 'OAUTH_AUTH_CODES';
 
     /**
      * The guarded attributes on the model.
@@ -26,7 +26,7 @@ class AuthCode extends Model
      * @var array
      */
     protected $casts = [
-        'revoked' => 'bool',
+        'REVOKED' => 'bool',
     ];
 
     /**
@@ -35,7 +35,7 @@ class AuthCode extends Model
      * @var array
      */
     protected $dates = [
-        'expires_at',
+        'EXPIRES_AT',
     ];
 
     /**

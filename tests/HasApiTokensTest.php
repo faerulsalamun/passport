@@ -26,10 +26,10 @@ class HasApiTokensTest extends TestCase
         $container = new Container;
         Container::setInstance($container);
         $container->instance(Laravel\Passport\PersonalAccessTokenFactory::class, $factory = Mockery::mock());
-        $factory->shouldReceive('make')->once()->with(1, 'name', ['scopes']);
+        $factory->shouldReceive('make')->once()->with(1, 'NAME', ['SCOPES']);
         $user = new HasApiTokensTestStub;
 
-        $user->createToken('name', ['scopes']);
+        $user->createToken('NAME', ['SCOPES']);
     }
 }
 

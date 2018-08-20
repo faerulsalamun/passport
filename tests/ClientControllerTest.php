@@ -14,7 +14,7 @@ class ClientControllerTest extends TestCase
     {
         $clients = Mockery::mock('Laravel\Passport\ClientRepository');
         $clients->shouldReceive('activeForUser')->once()->with(1)->andReturn($client = Mockery::mock());
-        $client->shouldReceive('makeVisible')->with('secret')->andReturn($client);
+        $client->shouldReceive('makeVisible')->with('SECRET')->andReturn($client);
 
         $request = Mockery::mock('Illuminate\Http\Request');
         $request->shouldReceive('user')->andReturn(new ClientControllerFakeUser);
@@ -30,20 +30,20 @@ class ClientControllerTest extends TestCase
     {
         $clients = Mockery::mock('Laravel\Passport\ClientRepository');
 
-        $request = Request::create('/', 'GET', ['name' => 'client name', 'redirect' => 'http://localhost']);
+        $request = Request::create('/', 'GET', ['NAME' => 'client NAME', 'REDIRECT' => 'http://localhost']);
         $request->setUserResolver(function () {
             return new ClientControllerFakeUser;
         });
 
-        $clients->shouldReceive('create')->once()->with(1, 'client name', 'http://localhost')->andReturn($client = new Laravel\Passport\Client);
+        $clients->shouldReceive('create')->once()->with(1, 'client NAME', 'http://localhost')->andReturn($client = new Laravel\Passport\Client);
 
         $validator = Mockery::mock('Illuminate\Contracts\Validation\Factory');
         $validator->shouldReceive('make')->once()->with([
-            'name' => 'client name',
-            'redirect' => 'http://localhost',
+            'NAME' => 'client NAME',
+            'REDIRECT' => 'http://localhost',
         ], [
-            'name' => 'required|max:255',
-            'redirect' => 'required|url',
+            'NAME' => 'required|max:255',
+            'REDIRECT' => 'required|url',
         ])->andReturn($validator);
         $validator->shouldReceive('validate')->once();
 
@@ -60,7 +60,7 @@ class ClientControllerTest extends TestCase
         $client = Mockery::mock('Laravel\Passport\Client');
         $clients->shouldReceive('findForUser')->with(1, 1)->andReturn($client);
 
-        $request = Request::create('/', 'GET', ['name' => 'client name', 'redirect' => 'http://localhost']);
+        $request = Request::create('/', 'GET', ['NAME' => 'client NAME', 'REDIRECT' => 'http://localhost']);
 
         $request->setUserResolver(function () {
             $user = Mockery::mock();
@@ -70,16 +70,16 @@ class ClientControllerTest extends TestCase
         });
 
         $clients->shouldReceive('update')->once()->with(
-            Mockery::type('Laravel\Passport\Client'), 'client name', 'http://localhost'
+            Mockery::type('Laravel\Passport\Client'), 'client NAME', 'http://localhost'
         )->andReturn('response');
 
         $validator = Mockery::mock('Illuminate\Contracts\Validation\Factory');
         $validator->shouldReceive('make')->once()->with([
-            'name' => 'client name',
-            'redirect' => 'http://localhost',
+            'NAME' => 'client NAME',
+            'REDIRECT' => 'http://localhost',
         ], [
-            'name' => 'required|max:255',
-            'redirect' => 'required|url',
+            'NAME' => 'required|max:255',
+            'REDIRECT' => 'required|url',
         ])->andReturn($validator);
         $validator->shouldReceive('validate')->once();
 
@@ -95,7 +95,7 @@ class ClientControllerTest extends TestCase
         $clients = Mockery::mock('Laravel\Passport\ClientRepository');
         $clients->shouldReceive('findForUser')->with(1, 1)->andReturnNull();
 
-        $request = Request::create('/', 'GET', ['name' => 'client name', 'redirect' => 'http://localhost']);
+        $request = Request::create('/', 'GET', ['NAME' => 'client NAME', 'REDIRECT' => 'http://localhost']);
 
         $request->setUserResolver(function () {
             $user = Mockery::mock();
@@ -121,7 +121,7 @@ class ClientControllerTest extends TestCase
         $client = Mockery::mock('Laravel\Passport\Client');
         $clients->shouldReceive('findForUser')->with(1, 1)->andReturn($client);
 
-        $request = Request::create('/', 'GET', ['name' => 'client name', 'redirect' => 'http://localhost']);
+        $request = Request::create('/', 'GET', ['NAME' => 'client NAME', 'REDIRECT' => 'http://localhost']);
 
         $request->setUserResolver(function () {
             $user = Mockery::mock();
@@ -148,7 +148,7 @@ class ClientControllerTest extends TestCase
         $clients = Mockery::mock('Laravel\Passport\ClientRepository');
         $clients->shouldReceive('findForUser')->with(1, 1)->andReturnNull();
 
-        $request = Request::create('/', 'GET', ['name' => 'client name', 'redirect' => 'http://localhost']);
+        $request = Request::create('/', 'GET', ['NAME' => 'client NAME', 'REDIRECT' => 'http://localhost']);
 
         $request->setUserResolver(function () {
             $user = Mockery::mock();
@@ -174,6 +174,6 @@ class ClientControllerFakeUser
     public $id = 1;
     public function getKey()
     {
-        return $this->id;
+        return $this->ID;
     }
 }
