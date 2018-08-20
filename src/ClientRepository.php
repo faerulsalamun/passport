@@ -128,7 +128,7 @@ class ClientRepository
     {
         return tap($this->create($userId, $name, $redirect, true), function ($client) {
             $accessClient = Passport::personalAccessClient();
-            $accessClient->CLIENT_ID = $client->ID;
+            $accessClient->CLIENT_ID = $client->id;
             $accessClient->save();
         });
     }
