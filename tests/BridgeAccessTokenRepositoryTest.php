@@ -24,8 +24,8 @@ class BridgeAccessTokenRepositoryTest extends TestCase
             $this->assertEquals('client-ID', $array['CLIENT_ID']);
             $this->assertEquals(['SCOPES'], $array['SCOPES']);
             $this->assertEquals(false, $array['REVOKED']);
-            $this->assertInstanceOf('DateTime', $array['created_at']);
-            $this->assertInstanceOf('DateTime', $array['updated_at']);
+            $this->assertInstanceOf('DateTime', $array['CREATED_AT']);
+            $this->assertInstanceOf('DateTime', $array['UPDATED_AT']);
             $this->assertEquals($expiration, $array['EXPIRES_AT']);
         });
 
