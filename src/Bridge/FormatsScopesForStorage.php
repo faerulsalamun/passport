@@ -5,7 +5,7 @@ namespace Laravel\Passport\Bridge;
 trait FormatsScopesForStorage
 {
     /**
-     * Format the given scopes for storage.
+     * Format the given SCOPES for storage.
      *
      * @param  array  $scopes
      * @return string

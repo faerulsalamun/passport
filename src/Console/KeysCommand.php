@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 class KeysCommand extends Command
 {
     /**
-     * The name and signature of the console command.
+     * The NAME and signature of the console command.
      *
      * @var string
      */

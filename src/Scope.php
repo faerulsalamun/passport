@@ -8,7 +8,7 @@ use Illuminate\Contracts\Support\Arrayable;
 class Scope implements Arrayable, Jsonable
 {
     /**
-     * The name / ID of the scope.
+     * The NAME / ID of the scope.
      *
      * @var string
      */
@@ -30,7 +30,7 @@ class Scope implements Arrayable, Jsonable
      */
     public function __construct($id, $description)
     {
-        $this->id = $id;
+        $this->ID = $id;
         $this->description = $description;
     }
 
@@ -42,7 +42,7 @@ class Scope implements Arrayable, Jsonable
     public function toArray()
     {
         return [
-            'id' => $this->id,
+            'ID' => $this->ID,
             'description' => $this->description,
         ];
     }

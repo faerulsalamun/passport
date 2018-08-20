@@ -54,7 +54,7 @@ class CheckClientCredentials
     }
 
     /**
-     * Validate the scopes on the incoming request.
+     * Validate the SCOPES on the incoming request.
      *
      * @param  \Psr\Http\Message\ServerRequestInterface $psr
      * @param  array  $scopes

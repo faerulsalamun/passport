@@ -112,11 +112,11 @@ class RouteRegistrar
                 'uses' => 'ClientController@store',
             ]);
 
-            $router->put('/clients/{client_id}', [
+            $router->put('/clients/{CLIENT_ID}', [
                 'uses' => 'ClientController@update',
             ]);
 
-            $router->delete('/clients/{client_id}', [
+            $router->delete('/clients/{CLIENT_ID}', [
                 'uses' => 'ClientController@destroy',
             ]);
         });
@@ -130,7 +130,7 @@ class RouteRegistrar
     public function forPersonalAccessTokens()
     {
         $this->router->group(['middleware' => ['web', 'auth']], function ($router) {
-            $router->get('/scopes', [
+            $router->get('/SCOPES', [
                 'uses' => 'ScopeController@all',
             ]);
 

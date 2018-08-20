@@ -61,11 +61,11 @@ class RefreshTokenRepository implements RefreshTokenRepositoryInterface
      */
     public function persistNewRefreshToken(RefreshTokenEntityInterface $refreshTokenEntity)
     {
-        $this->database->table('oauth_refresh_tokens')->insert([
-            'id' => $id = $refreshTokenEntity->getIdentifier(),
-            'access_token_id' => $accessTokenId = $refreshTokenEntity->getAccessToken()->getIdentifier(),
-            'revoked' => false,
-            'expires_at' => $refreshTokenEntity->getExpiryDateTime(),
+        $this->database->table('OAUTH_REFRESH_TOKENS')->insert([
+            'ID' => $id = $refreshTokenEntity->getIdentifier(),
+            'ACCESS_TOKEN_ID' => $accessTokenId = $refreshTokenEntity->getAccessToken()->getIdentifier(),
+            'REVOKED' => false,
+            'EXPIRES_AT' => $refreshTokenEntity->getExpiryDateTime(),
         ]);
 
         $this->events->fire(new RefreshTokenCreated($id, $accessTokenId));
@@ -76,8 +76,8 @@ class RefreshTokenRepository implements RefreshTokenRepositoryInterface
      */
     public function revokeRefreshToken($tokenId)
     {
-        $this->database->table('oauth_refresh_tokens')
-                    ->where('id', $tokenId)->update(['revoked' => true]);
+        $this->database->table('OAUTH_REFRESH_TOKENS')
+                    ->where('ID', $tokenId)->update(['REVOKED' => true]);
     }
 
     /**
@@ -85,15 +85,15 @@ class RefreshTokenRepository implements RefreshTokenRepositoryInterface
      */
     public function isRefreshTokenRevoked($tokenId)
     {
-        $refreshToken = $this->database->table('oauth_refresh_tokens')
-                    ->where('id', $tokenId)->first();
+        $refreshToken = $this->database->table('OAUTH_REFRESH_TOKENS')
+                    ->where('ID', $tokenId)->first();
 
-        if ($refreshToken === null || $refreshToken->revoked) {
+        if ($refreshToken === null || $refreshToken->REVOKED) {
             return true;
         }
 
         return $this->tokens->isAccessTokenRevoked(
-            $refreshToken->access_token_id
+            $refreshToken->ACCESS_TOKEN_ID
         );
     }
 }

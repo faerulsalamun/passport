@@ -39,7 +39,7 @@
                             <tr v-for="token in tokens">
                                 <!-- Client Name -->
                                 <td style="vertical-align: middle;">
-                                    {{ token.name }}
+                                    {{ token.NAME }}
                                 </td>
 
                                 <!-- Delete Button -->
@@ -91,18 +91,18 @@
                             </div>
 
                             <!-- Scopes -->
-                            <div class="form-group row" v-if="scopes.length > 0">
+                            <div class="form-group row" v-if="SCOPES.length > 0">
                                 <label class="col-md-4 col-form-label">Scopes</label>
 
                                 <div class="col-md-6">
-                                    <div v-for="scope in scopes">
+                                    <div v-for="scope in SCOPES">
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox"
-                                                    @click="toggleScope(scope.id)"
-                                                    :checked="scopeIsAssigned(scope.id)">
+                                                    @click="toggleScope(scope.ID)"
+                                                    :checked="scopeIsAssigned(scope.ID)">
 
-                                                    {{ scope.id }}
+                                                    {{ scope.ID }}
                                             </label>
                                         </div>
                                     </div>
@@ -164,11 +164,11 @@
                 accessToken: null,
 
                 tokens: [],
-                scopes: [],
+                SCOPES: [],
 
                 form: {
-                    name: '',
-                    scopes: [],
+                    NAME: '',
+                    SCOPES: [],
                     errors: []
                 }
             };
@@ -212,12 +212,12 @@
             },
 
             /**
-             * Get all of the available scopes.
+             * Get all of the available SCOPES.
              */
             getScopes() {
-                axios.get('/oauth/scopes')
+                axios.get('/oauth/SCOPES')
                         .then(response => {
-                            this.scopes = response.data;
+                            this.SCOPES = response.data;
                         });
             },
 
@@ -238,8 +238,8 @@
 
                 axios.post('/oauth/personal-access-tokens', this.form)
                         .then(response => {
-                            this.form.name = '';
-                            this.form.scopes = [];
+                            this.form.NAME = '';
+                            this.form.SCOPES = [];
                             this.form.errors = [];
 
                             this.tokens.push(response.data.token);
@@ -256,13 +256,13 @@
             },
 
             /**
-             * Toggle the given scope in the list of assigned scopes.
+             * Toggle the given scope in the list of assigned SCOPES.
              */
             toggleScope(scope) {
                 if (this.scopeIsAssigned(scope)) {
-                    this.form.scopes = _.reject(this.form.scopes, s => s == scope);
+                    this.form.SCOPES = _.reject(this.form.SCOPES, s => s == scope);
                 } else {
-                    this.form.scopes.push(scope);
+                    this.form.SCOPES.push(scope);
                 }
             },
 
@@ -270,7 +270,7 @@
              * Determine if the given scope has been assigned to the token.
              */
             scopeIsAssigned(scope) {
-                return _.indexOf(this.form.scopes, scope) >= 0;
+                return _.indexOf(this.form.SCOPES, scope) >= 0;
             },
 
             /**
@@ -288,7 +288,7 @@
              * Revoke the given token.
              */
             revoke(token) {
-                axios.delete('/oauth/personal-access-tokens/' + token.id)
+                axios.delete('/oauth/personal-access-tokens/' + token.ID)
                         .then(response => {
                             this.getTokens();
                         });

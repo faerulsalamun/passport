@@ -9,7 +9,7 @@ use Laravel\Passport\PersonalAccessClient;
 class ClientCommand extends Command
 {
     /**
-     * The name and signature of the console command.
+     * The NAME and signature of the console command.
      *
      * @var string
      */
@@ -17,7 +17,7 @@ class ClientCommand extends Command
             {--personal : Create a personal access token client}
             {--password : Create a password grant client}
             {--client : Create a client credentials grant client}
-            {--name= : The name of the client}';
+            {--NAME= : The NAME of the client}';
 
     /**
      * The console command description.
@@ -57,9 +57,9 @@ class ClientCommand extends Command
      */
     protected function createPersonalClient(ClientRepository $clients)
     {
-        $name = $this->option('name') ?: $this->ask(
-            'What should we name the personal access client?',
-            config('app.name').' Personal Access Client'
+        $name = $this->option('NAME') ?: $this->ask(
+            'What should we NAME the personal access client?',
+            config('app.NAME').' Personal Access Client'
         );
 
         $client = $clients->createPersonalAccessClient(
@@ -67,8 +67,8 @@ class ClientCommand extends Command
         );
 
         $this->info('Personal access client created successfully.');
-        $this->line('<comment>Client ID:</comment> '.$client->id);
-        $this->line('<comment>Client Secret:</comment> '.$client->secret);
+        $this->line('<comment>Client ID:</comment> '.$client->ID);
+        $this->line('<comment>Client Secret:</comment> '.$client->SECRET);
     }
 
     /**
@@ -79,9 +79,9 @@ class ClientCommand extends Command
      */
     protected function createPasswordClient(ClientRepository $clients)
     {
-        $name = $this->option('name') ?: $this->ask(
-            'What should we name the password grant client?',
-            config('app.name').' Password Grant Client'
+        $name = $this->option('NAME') ?: $this->ask(
+            'What should we NAME the password grant client?',
+            config('app.NAME').' Password Grant Client'
         );
 
         $client = $clients->createPasswordGrantClient(
@@ -89,8 +89,8 @@ class ClientCommand extends Command
         );
 
         $this->info('Password grant client created successfully.');
-        $this->line('<comment>Client ID:</comment> '.$client->id);
-        $this->line('<comment>Client Secret:</comment> '.$client->secret);
+        $this->line('<comment>Client ID:</comment> '.$client->ID);
+        $this->line('<comment>Client Secret:</comment> '.$client->SECRET);
     }
 
     /**
@@ -105,12 +105,12 @@ class ClientCommand extends Command
             'Which user ID should the client be assigned to?'
         );
 
-        $name = $this->option('name') ?: $this->ask(
-            'What should we name the client?'
+        $name = $this->option('NAME') ?: $this->ask(
+            'What should we NAME the client?'
         );
 
         $redirect = $this->ask(
-            'Where should we redirect the request after authorization?',
+            'Where should we REDIRECT the request after authorization?',
             url('/auth/callback')
         );
 
@@ -119,8 +119,8 @@ class ClientCommand extends Command
         );
 
         $this->info('New client created successfully.');
-        $this->line('<comment>Client ID:</comment> '.$client->id);
-        $this->line('<comment>Client secret:</comment> '.$client->secret);
+        $this->line('<comment>Client ID:</comment> '.$client->ID);
+        $this->line('<comment>Client SECRET:</comment> '.$client->SECRET);
     }
 
     /**
@@ -131,8 +131,8 @@ class ClientCommand extends Command
      */
     protected function createClientCredentialsClient(ClientRepository $clients)
     {
-        $name = $this->option('name') ?: $this->ask(
-            'What should we name the client?'
+        $name = $this->option('NAME') ?: $this->ask(
+            'What should we NAME the client?'
         );
 
         $client = $clients->create(
@@ -140,7 +140,7 @@ class ClientCommand extends Command
         );
 
         $this->info('New client created successfully.');
-        $this->line('<comment>Client ID:</comment> '.$client->id);
-        $this->line('<comment>Client secret:</comment> '.$client->secret);
+        $this->line('<comment>Client ID:</comment> '.$client->ID);
+        $this->line('<comment>Client SECRET:</comment> '.$client->SECRET);
     }
 }

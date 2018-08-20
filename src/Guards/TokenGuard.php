@@ -130,8 +130,8 @@ class TokenGuard
 
             // Finally, we will verify if the client that issued this token is still valid and
             // its tokens may still be used. If not, we will bail out since we don't want a
-            // user to be able to send access tokens for deleted or revoked applications.
-            if ($this->clients->revoked($clientId)) {
+            // user to be able to send access tokens for deleted or REVOKED applications.
+            if ($this->clients->REVOKED($clientId)) {
                 return;
             }
 
@@ -171,7 +171,7 @@ class TokenGuard
         }
 
         // If this user exists, we will return this user and attach a "transient" token to
-        // the user model. The transient token assumes it has all scopes since the user
+        // the user model. The transient token assumes it has all SCOPES since the user
         // is physically logged into the application via the application's interface.
         if ($user = $this->provider->retrieveById($token['sub'])) {
             return $user->withAccessToken(new TransientToken);

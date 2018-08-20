@@ -34,7 +34,7 @@ class TokenGuardTest extends TestCase
         $psr->shouldReceive('getAttribute')->with('oauth_access_token_id')->andReturn('token');
         $userProvider->shouldReceive('retrieveById')->with(1)->andReturn(new TokenGuardTestUser);
         $tokens->shouldReceive('find')->once()->with('token')->andReturn($token = Mockery::mock());
-        $clients->shouldReceive('revoked')->with(1)->andReturn(false);
+        $clients->shouldReceive('REVOKED')->with(1)->andReturn(false);
 
         $user = $guard->user($request);
 

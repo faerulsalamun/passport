@@ -8,7 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 class MissingScopeException extends AuthorizationException
 {
     /**
-     * The scopes that the user did not have.
+     * The SCOPES that the user did not have.
      *
      * @var array
      */
@@ -25,16 +25,16 @@ class MissingScopeException extends AuthorizationException
     {
         parent::__construct($message);
 
-        $this->scopes = Arr::wrap($scopes);
+        $this->SCOPES = Arr::wrap($scopes);
     }
 
     /**
-     * Get the scopes that the user did not have.
+     * Get the SCOPES that the user did not have.
      *
      * @return array
      */
-    public function scopes()
+    public function SCOPES()
     {
-        return $this->scopes;
+        return $this->SCOPES;
     }
 }

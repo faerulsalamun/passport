@@ -26,7 +26,7 @@ class TokenRepository
      */
     public function find($id)
     {
-        return Passport::token()->where('id', $id)->first();
+        return Passport::token()->where('ID', $id)->first();
     }
 
     /**
@@ -38,7 +38,7 @@ class TokenRepository
      */
     public function findForUser($id, $userId)
     {
-        return Passport::token()->where('id', $id)->where('user_id', $userId)->first();
+        return Passport::token()->where('ID', $id)->where('USER_ID', $userId)->first();
     }
 
     /**
@@ -49,7 +49,7 @@ class TokenRepository
      */
     public function forUser($userId)
     {
-        return Passport::token()->where('user_id', $userId)->get();
+        return Passport::token()->where('USER_ID', $userId)->get();
     }
 
     /**
@@ -64,7 +64,7 @@ class TokenRepository
         return $client->tokens()
                     ->whereUserId($user->getKey())
                     ->whereRevoked(0)
-                    ->where('expires_at', '>', Carbon::now())
+                    ->where('EXPIRES_AT', '>', Carbon::now())
                     ->first();
     }
 
@@ -87,20 +87,20 @@ class TokenRepository
      */
     public function revokeAccessToken($id)
     {
-        return Passport::token()->where('id', $id)->update(['revoked' => true]);
+        return Passport::token()->where('ID', $id)->update(['REVOKED' => true]);
     }
 
     /**
-     * Check if the access token has been revoked.
+     * Check if the access token has been REVOKED.
      *
      * @param  string  $id
      *
-     * @return bool Return true if this token has been revoked
+     * @return bool Return true if this token has been REVOKED
      */
     public function isAccessTokenRevoked($id)
     {
         if ($token = $this->find($id)) {
-            return $token->revoked;
+            return $token->REVOKED;
         }
 
         return true;
@@ -118,8 +118,8 @@ class TokenRepository
         return $client->tokens()
                       ->whereUserId($user->getKey())
                       ->whereRevoked(0)
-                      ->where('expires_at', '>', Carbon::now())
-                      ->latest('expires_at')
+                      ->where('EXPIRES_AT', '>', Carbon::now())
+                      ->latest('EXPIRES_AT')
                       ->first();
     }
 }

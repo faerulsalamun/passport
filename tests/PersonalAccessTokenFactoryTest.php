@@ -29,7 +29,7 @@ class PersonalAccessTokenFactoryTest extends TestCase
         $tokens->shouldReceive('find')->with('token')->andReturn($foundToken = new PersonalAccessTokenFactoryTestModelStub);
         $tokens->shouldReceive('save')->with($foundToken);
 
-        $result = $factory->make(1, 'token', ['scopes']);
+        $result = $factory->make(1, 'token', ['SCOPES']);
 
         $this->assertInstanceOf('Laravel\Passport\PersonalAccessTokenResult', $result);
     }

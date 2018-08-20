@@ -19,22 +19,22 @@ class BridgeAccessTokenRepositoryTest extends TestCase
         $events = Mockery::mock('Illuminate\Contracts\Events\Dispatcher');
 
         $tokenRepository->shouldReceive('create')->once()->andReturnUsing(function ($array) use ($expiration) {
-            $this->assertEquals(1, $array['id']);
-            $this->assertEquals(2, $array['user_id']);
-            $this->assertEquals('client-id', $array['client_id']);
-            $this->assertEquals(['scopes'], $array['scopes']);
-            $this->assertEquals(false, $array['revoked']);
+            $this->assertEquals(1, $array['ID']);
+            $this->assertEquals(2, $array['USER_ID']);
+            $this->assertEquals('client-ID', $array['CLIENT_ID']);
+            $this->assertEquals(['SCOPES'], $array['SCOPES']);
+            $this->assertEquals(false, $array['REVOKED']);
             $this->assertInstanceOf('DateTime', $array['created_at']);
             $this->assertInstanceOf('DateTime', $array['updated_at']);
-            $this->assertEquals($expiration, $array['expires_at']);
+            $this->assertEquals($expiration, $array['EXPIRES_AT']);
         });
 
         $events->shouldReceive('dispatch')->once();
 
-        $accessToken = new Laravel\Passport\Bridge\AccessToken(2, [new Laravel\Passport\Bridge\Scope('scopes')]);
+        $accessToken = new Laravel\Passport\Bridge\AccessToken(2, [new Laravel\Passport\Bridge\Scope('SCOPES')]);
         $accessToken->setIdentifier(1);
         $accessToken->setExpiryDateTime($expiration);
-        $accessToken->setClient(new Laravel\Passport\Bridge\Client('client-id', 'name', 'redirect'));
+        $accessToken->setClient(new Laravel\Passport\Bridge\Client('client-ID', 'NAME', 'REDIRECT'));
 
         $repository = new Laravel\Passport\Bridge\AccessTokenRepository($tokenRepository, $events);
 

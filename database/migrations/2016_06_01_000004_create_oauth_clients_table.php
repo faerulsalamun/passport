@@ -13,15 +13,15 @@ class CreateOauthClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('oauth_clients', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->index()->nullable();
-            $table->string('name');
-            $table->string('secret', 100);
-            $table->text('redirect');
-            $table->boolean('personal_access_client');
-            $table->boolean('password_client');
-            $table->boolean('revoked');
+        Schema::create('OAUTH_CLIENTS', function (Blueprint $table) {
+            $table->increments('ID');
+            $table->integer('USER_ID')->index()->nullable();
+            $table->string('NAME');
+            $table->string('SECRET', 100);
+            $table->text('REDIRECT');
+            $table->boolean('PERSONAL_ACCESS_CLIENT');
+            $table->boolean('PASSWORD_CLIENT');
+            $table->boolean('REVOKED');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateOauthClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oauth_clients');
+        Schema::dropIfExists('OAUTH_CLIENTS');
     }
 }

@@ -27,7 +27,7 @@ class ClientRepository
     {
         $client = $this->find($id);
 
-        return $client && ! $client->revoked ? $client : null;
+        return $client && ! $client->REVOKED ? $client : null;
     }
 
     /**
@@ -43,7 +43,7 @@ class ClientRepository
 
         return $client
                     ->where($client->getKeyName(), $clientId)
-                    ->where('user_id', $userId)
+                    ->where('USER_ID', $userId)
                     ->first();
     }
 
@@ -56,8 +56,8 @@ class ClientRepository
     public function forUser($userId)
     {
         return Passport::client()
-                    ->where('user_id', $userId)
-                    ->orderBy('name', 'asc')->get();
+                    ->where('USER_ID', $userId)
+                    ->orderBy('NAME', 'asc')->get();
     }
 
     /**
@@ -69,7 +69,7 @@ class ClientRepository
     public function activeForUser($userId)
     {
         return $this->forUser($userId)->reject(function ($client) {
-            return $client->revoked;
+            return $client->REVOKED;
         })->values();
     }
 
@@ -102,13 +102,13 @@ class ClientRepository
     public function create($userId, $name, $redirect, $personalAccess = false, $password = false)
     {
         $client = Passport::client()->forceFill([
-            'user_id' => $userId,
-            'name' => $name,
-            'secret' => str_random(40),
-            'redirect' => $redirect,
-            'personal_access_client' => $personalAccess,
-            'password_client' => $password,
-            'revoked' => false,
+            'USER_ID' => $userId,
+            'NAME' => $name,
+            'SECRET' => str_random(40),
+            'REDIRECT' => $redirect,
+            'PERSONAL_ACCESS_CLIENT' => $personalAccess,
+            'PASSWORD_CLIENT' => $password,
+            'REVOKED' => false,
         ]);
 
         $client->save();
@@ -128,7 +128,7 @@ class ClientRepository
     {
         return tap($this->create($userId, $name, $redirect, true), function ($client) {
             $accessClient = Passport::personalAccessClient();
-            $accessClient->client_id = $client->id;
+            $accessClient->CLIENT_ID = $client->ID;
             $accessClient->save();
         });
     }
@@ -157,14 +157,14 @@ class ClientRepository
     public function update(Client $client, $name, $redirect)
     {
         $client->forceFill([
-            'name' => $name, 'redirect' => $redirect,
+            'NAME' => $name, 'REDIRECT' => $redirect,
         ])->save();
 
         return $client;
     }
 
     /**
-     * Regenerate the client secret.
+     * Regenerate the client SECRET.
      *
      * @param  \Laravel\Passport\Client  $client
      * @return \Laravel\Passport\Client
@@ -172,23 +172,23 @@ class ClientRepository
     public function regenerateSecret(Client $client)
     {
         $client->forceFill([
-            'secret' => str_random(40),
+            'SECRET' => str_random(40),
         ])->save();
 
         return $client;
     }
 
     /**
-     * Determine if the given client is revoked.
+     * Determine if the given client is REVOKED.
      *
      * @param  int  $id
      * @return bool
      */
-    public function revoked($id)
+    public function REVOKED($id)
     {
         $client = $this->find($id);
 
-        return is_null($client) || $client->revoked;
+        return is_null($client) || $client->REVOKED;
     }
 
     /**
@@ -199,8 +199,8 @@ class ClientRepository
      */
     public function delete(Client $client)
     {
-        $client->tokens()->update(['revoked' => true]);
+        $client->tokens()->update(['REVOKED' => true]);
 
-        $client->forceFill(['revoked' => true])->save();
+        $client->forceFill(['REVOKED' => true])->save();
     }
 }

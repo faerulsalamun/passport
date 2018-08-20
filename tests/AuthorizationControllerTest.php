@@ -38,7 +38,7 @@ class AuthorizationControllerTest extends TestCase
             $this->assertEquals('passport::authorize', $view);
             $this->assertEquals('client', $data['client']);
             $this->assertEquals('user', $data['user']);
-            $this->assertEquals('description', $data['scopes'][0]->description);
+            $this->assertEquals('description', $data['SCOPES'][0]->description);
 
             return 'view';
         });
@@ -111,7 +111,7 @@ class AuthorizationControllerTest extends TestCase
 
         $tokens = Mockery::mock('Laravel\Passport\TokenRepository');
         $tokens->shouldReceive('findValidToken')->with($user, 'client')->andReturn($token = Mockery::mock('Laravel\Passport\Token'));
-        $token->shouldReceive('getAttribute')->with('scopes')->andReturn(['scope-1']);
+        $token->shouldReceive('getAttribute')->with('SCOPES')->andReturn(['scope-1']);
 
         $this->assertEquals('approved', $controller->authorize(
             Mockery::mock('Psr\Http\Message\ServerRequestInterface'), $request, $clients, $tokens

@@ -11,7 +11,7 @@ class Client extends Model
      *
      * @var string
      */
-    protected $table = 'oauth_clients';
+    protected $table = 'OAUTH_CLIENTS';
 
     /**
      * The guarded attributes on the model.
@@ -26,7 +26,7 @@ class Client extends Model
      * @var array
      */
     protected $hidden = [
-        'secret',
+        'SECRET',
     ];
 
     /**
@@ -36,9 +36,9 @@ class Client extends Model
      */
     protected $casts = [
         'grant_types' => 'array',
-        'personal_access_client' => 'bool',
-        'password_client' => 'bool',
-        'revoked' => 'bool',
+        'PERSONAL_ACCESS_CLIENT' => 'bool',
+        'PASSWORD_CLIENT' => 'bool',
+        'REVOKED' => 'bool',
     ];
 
     /**
@@ -48,7 +48,7 @@ class Client extends Model
      */
     public function authCodes()
     {
-        return $this->hasMany(Passport::authCodeModel(), 'client_id');
+        return $this->hasMany(Passport::authCodeModel(), 'CLIENT_ID');
     }
 
     /**
@@ -58,7 +58,7 @@ class Client extends Model
      */
     public function tokens()
     {
-        return $this->hasMany(Passport::tokenModel(), 'client_id');
+        return $this->hasMany(Passport::tokenModel(), 'CLIENT_ID');
     }
 
     /**
@@ -68,6 +68,6 @@ class Client extends Model
      */
     public function firstParty()
     {
-        return $this->personal_access_client || $this->password_client;
+        return $this->PERSONAL_ACCESS_CLIENT || $this->PASSWORD_CLIENT;
     }
 }
