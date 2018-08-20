@@ -22,8 +22,8 @@ class CreateOauthClientsTable extends Migration
             $table->boolean('PERSONAL_ACCESS_CLIENT');
             $table->boolean('PASSWORD_CLIENT');
             $table->boolean('REVOKED');
-            $table->timestamps('CREATED_AT');
-            $table->timestamps('UPDATED_AT');
+            $table->timestamp('CREATED_AT');
+            $table->timestamp('UPDATED_AT');
         });
     }
 
